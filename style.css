@@ -1,0 +1,990 @@
+   /* Variables CSS pour la cohérence des couleurs dans tout le site */
+   :root {
+    --bleu-nuit: #0a1929; /* Couleur de fond principale */
+    --bleu-fonce: #102a43; /* Couleur secondaire pour les éléments */
+    --violet: #6b46c1; /* Couleur d'accent principale */
+    --violet-clair: #9f7aea; /* Couleur d'accent secondaire */
+    --blanc: #f8fafc; /* Couleur du texte */
+}
+
+/* Reset CSS de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style du corps de la page */
+body {
+    background-color: var(--bleu-nuit);
+    color: var(--blanc);
+    line-height: 1.6;
+}
+
+/* Conteneur principal limitant la largeur du contenu et le centrant */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* STYLES DE L'EN-TÊTE */
+header {
+    padding: 30px 0;
+}
+
+/* Barre de navigation avec flexbox pour aligner les éléments */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style du logo image */
+.logoimg {
+    width: 10%;
+    margin-right: 10px; /* Largeur du logo */
+}
+
+/* Style du texte du logo */
+/* .logo  {
+    font-size: 10px;
+  
+   
+} */
+
+/* Menu de navigation avec espacement entre les liens */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Style des liens de navigation */
+.nav-links a {
+    color: var(--blanc);
+    text-decoration: none;
+    transition: color 0.3s; /* Animation de transition sur survol */
+}
+
+/* Effet au survol des liens */
+.nav-links a:hover {
+    color: var(--violet-clair);
+}
+
+/* STYLES DE LA SECTION HÉRO (BANNIÈRE) */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 0;
+}
+
+/* Titre principal */
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--violet);
+}
+
+/* Paragraphe d'introduction */
+.hero p {
+    font-size: 20px;
+    max-width: 700px;
+    margin-bottom: 20px;
+}
+
+/* Ajustement de la marge du second bouton */
+.btn2 {
+    margin-top: 40px;
+}
+
+/* Style des boutons d'action */
+.btn {
+    display: inline-block;
+    background-color: var(--violet);
+    color: var(--blanc);
+    padding: 14px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(107, 70, 193, 0.4), 0 5px 10px rgba(16, 42, 67, 0.3);
+   
+}
+
+/* Effet d'animation au survol des boutons */
+.btn:hover {
+    background-color: var(--violet-clair);
+    transform: translateY(-1px); /* Effet de soulèvement */
+    box-shadow: 0 4px 5px rgba(107, 10, 193, 0.7), 0 10px 20px rgba(16, 42, 67, 0.6);
+}
+
+
+/* STYLES DE LA SECTION À PROPOS */
+.about {
+    padding: 100px 0;
+}
+
+/* Disposition du contenu avec flexbox */
+.about-content {
+    display: flex;
+    gap: 50px; /* Espace entre l'image et le texte */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Conteneur de l'image de profil */
+.about-img {
+    flex: 0 0 400px; /* Largeur fixe de 400px pour l'image */
+    position: relative;
+}
+
+/* Effet de tache violette derrière l'image (pseudo-élément) */
+.about-img::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    background: var(--violet);
+    border-radius: 20px;
+    filter: blur(25px);
+    opacity: 0.6;
+    z-index: 1;
+    animation: pulseGlow 3s infinite alternate;
+}
+
+/* Style de l'image de profil */
+.about-img img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1; /* Garde l'image carrée */
+    border-radius: 20px;
+    object-fit: cover;
+    border: 3px solid var(--violet-clair);
+    box-shadow: 0 20px 40px rgba(16, 42, 67, 0.15), 0 10px 10px rgba(107, 70, 193, 0.7);
+    z-index: 2;
+    animation: fadeInDelayed 1.5s ease-out;
+    transition: all 0.3s ease;
+}
+
+/* Effet au survol de l'image de profil */
+.about-img:hover img {
+    box-shadow: 0 25px 50px rgba(16, 42, 67, 0.2), 0 15px 15px rgba(107, 70, 193, 0.8);
+    transform: scale(1.05); /* Léger agrandissement */
+}
+
+/* Style du texte de la section À propos */
+.about-text {
+    flex: 1; /* Le texte prend tout l'espace restant */
+    min-width: 0; /* Permet au texte de se redimensionner */
+}
+
+/* Animation de pulsation pour la tache violette */
+@keyframes pulseGlow {
+    0% {
+        filter: blur(20px);
+        opacity: 0.8;
+    }
+    100% {
+        filter: blur(30px);
+        opacity: 0.4;
+    }
+}
+
+/* Animation d'apparition avec délai pour l'image */
+@keyframes fadeInDelayed {
+    0%, 20% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE - Passage en colonne sur mobile */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .about-img,
+    .about-text {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Style des titres de section */
+.section-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--violet);
+}
+
+/* STYLES DE LA SECTION COMPÉTENCES */
+.skills {
+    padding: 100px 0;
+    background-color: rgba(16, 42, 67, 0.3); /* Fond légèrement plus foncé */
+}
+
+/* Grille responsive pour les cartes de compétences */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+/* Style des cartes de compétences */
+.skill-card {
+    background-color: var(--bleu-fonce);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--violet);
+    box-shadow: 0 5px 5px rgba(16, 42, 67, 0.7), 0 1px 5px rgba(107, 70, 193, 0.6);
+    transition: all 0.3s ease;
+}
+
+/* Effet au survol des cartes de compétences */
+.skill-card:hover {
+    transform: translateY(-10px); /* Effet de soulèvement */
+    box-shadow: 0 2px 10px rgba(16, 42, 67, 0.8), 0 15px 10px rgba(107, 70, 193, 0.7);
+}
+
+/* Titres des cartes de compétences */
+.skill-card h3 {
+    margin-bottom: 15px;
+    color: var(--violet-clair);
+}
+
+/* STYLES DE LA SECTION PROJETS */
+.projects {
+    padding: 100px 0;
+}
+
+/* Grille responsive pour les cartes de projets */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+/* Style des cartes de projets */
+.project-card {
+    background-color: var(--bleu-fonce);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--violet);
+    box-shadow: 0 5px 10px rgba(16, 42, 67, 0.7), 0 2px 5px rgba(107, 70, 193, 0.6);
+    transition: all 0.3s ease;
+}
+
+/* Effet au survol des cartes de projets */
+.project-card:hover {
+    transform: translateY(-10px); /* Effet de soulèvement */
+    box-shadow: 0 5px 10px rgba(16, 42, 67, 0.8), 0 5px 10px rgba(107, 70, 193, 0.7);
+}
+
+/* Style des images de projets */
+.project-img {
+    width: 100%;
+    height: 200px;
+    background-color: #152638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--violet-clair);
+    font-size: 24px;
+    box-shadow: inset 0 0 10px rgba(77, 4, 248, 0.6);
+    transition: all 0.3s ease;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Effet au survol des images de projets */
+.project-card:hover .project-img {
+    box-shadow: inset 0 0 50px rgba(71, 7, 219, 0.8);
+}
+
+/* Style du contenu textuel des cartes de projets */
+.project-content {
+    padding: 20px;
+}
+
+/* Titres des projets */
+.project-content h3 {
+    color: var(--violet);
+    margin-bottom: 10px;
+}
+
+/* Conteneur des liens de projets */
+.project-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Style des liens des projets */
+.project-links a {
+    padding: 10px 20px;
+    background-color: var(--violet);
+    color: var(--blanc);
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(107, 70, 193, 0.4), 0 2px 4px rgba(16, 42, 67, 0.3);
+}
+
+/* Effet au survol des liens de projets */
+.project-links a:hover {
+    background-color: var(--violet-clair);
+    box-shadow: 0 8px 16px rgba(107, 70, 193, 0.7), 0 5px 10px rgba(16, 42, 67, 0.6);
+    transform: translateY(-3px); /* Léger soulèvement */
+}
+
+/* STYLES DE LA SECTION CONTACT */
+.contact {
+    padding: 100px 0;
+    background-color: rgba(16, 42, 67, 0.3); /* Fond légèrement plus foncé */
+}
+
+/* Style du formulaire de contact */
+.contact-form {
+    max-width: 600px;
+    margin: 50px auto 0;
+}
+
+/* Style des groupes de champs du formulaire */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Style des étiquettes des champs */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style des champs de saisie */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--violet);
+    background-color: var(--bleu-fonce);
+    color: var(--blanc);
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 2px 5px rgba(16, 42, 67, 0.5);
+}
+
+/* Style des champs de saisie au focus */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--violet-clair);
+    box-shadow: 0 0 0 4px rgba(159, 122, 234, 0.3), inset 0 2px 5px rgba(16, 42, 67, 0.3);
+}
+
+/* STYLES DU PIED DE PAGE */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid rgba(107, 70, 193, 0.3);
+}
+
+/* Style des liens sociaux */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Style des liens sociaux */
+.social-links a {
+    color: var(--violet);
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+/* Effet au survol des liens sociaux */
+.social-links a:hover {
+    color: var(--violet-clair);
+}
+
+/* ANIMATIONS */
+/* Animation d'apparition des éléments */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Classe pour les éléments animés */
+.animated {
+    animation: fadeIn 1s ease-out;
+}
+
+/* MEDIA QUERIES POUR RESPONSIVE */
+@media (max-width: 768px) {
+    /* Réorganisation sur mobile */
+    .about-content {
+        flex-direction: column;
+    }
+    
+    /* Ajustement des éléments sur mobile */
+    .about-img,
+    .about-text {
+        flex: auto;
+        width: 100%;
+    }
+    
+    /* Taille du titre réduite sur mobile */
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    /* Taille du texte réduite sur mobile */
+    .hero p {
+        font-size: 18px;
+    }
+    
+    /* Masquer le menu sur mobile (il faudrait un menu hamburger) */
+    .nav-links {
+        display: none;
+    }
+}
+.project-img {
+    width: 100%;
+    height: 300px; /* Increased height to allow scrolling */
+    background-color: #152638;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--violet-clair);
+    font-size: 24px;
+    box-shadow: inset 0 0 10px rgba(77, 4, 248, 0.6);
+    transition: all 0.3s ease;
+    border-radius: 15px 15px 0 0;
+   
+}
+
+/* Style for the image inside project-img */
+.project-img img {
+    width: 100%;
+    object-fit: cover; /* Maintain aspect ratio */
+    min-height: 100%; /* Ensure image fills the container */
+}
+
+/* Effet au survol des images de projets */
+.project-card:hover .project-img {
+    box-shadow: inset 0 0 50px rgba(71, 7, 219, 0.8);
+}
+
+/* Scrollbar styling for better aesthetics */
+.project-img::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-img::-webkit-scrollbar-track {
+    background: rgba(16, 42, 67, 0.3);
+}
+
+.project-img::-webkit-scrollbar-thumb {
+    background: var(--violet);
+    border-radius: 4px;
+}
+
+.project-img::-webkit-scrollbar-thumb:hover {
+    background: var(--violet-clair);
+}
+/* Augmentation des tailles de texte pour tout le portfolio */
+
+/* Texte de base du site */
+body {
+font-size: 18px; /* Taille de base augmentée */
+}
+
+/* Logo plus grand */
+.logo {
+font-size: 32px; /* Était 24px */
+}
+
+/* Liens de navigation */
+.nav-links a {
+font-size: 20px; /* Plus grand */
+}
+
+/* Section héro */
+.hero h1 {
+font-size: 64px; /* Était 48px */
+}
+
+.hero p {
+font-size: 26px; /* Était 20px */
+}
+
+/* Boutons */
+.btn {
+font-size: 20px; /* Plus grand */
+padding: 16px 34px; /* Plus spacieux */
+}
+
+/* Section à propos */
+.about-text p {
+font-size: 20px; /* Plus grand */
+}
+
+/* Titres de sections */
+.section-title {
+font-size: 48px; /* Était 36px */
+}
+
+/* Texte d'introduction de section */
+section > .container > p {
+font-size: 22px; /* Plus grand */
+}
+
+/* Cartes de compétences */
+.skill-card {
+font-size: 20px; /* Plus grand */
+}
+
+.skill-card h3 {
+font-size: 26px; /* Plus grand */
+margin-bottom: 20px; /* Plus d'espace */
+}
+
+.skill-card ul li {
+margin-bottom: 10px; /* Plus d'espace entre les éléments */
+}
+
+/* Projets */
+.project-content h3 {
+font-size: 26px; /* Plus grand */
+}
+
+.project-content p {
+font-size: 18px; /* Plus grand */
+}
+
+.project-links a {
+font-size: 18px; /* Était 14px */
+padding: 12px 24px; /* Plus spacieux */
+}
+
+/* Formulaire de contact */
+.form-group label {
+font-size: 20px; /* Plus grand */
+}
+
+.form-group input,
+.form-group textarea {
+font-size: 18px; /* Plus grand */
+padding: 18px; /* Plus d'espace interne */
+}
+
+/* Pied de page */
+footer {
+font-size: 18px; /* Plus grand */
+}
+
+.social-links a {
+font-size: 28px; /* Était 24px */
+}
+
+/* Responsive - Ajustements pour mobile */
+@media (max-width: 768px) {
+.hero h1 {
+font-size: 48px; /* Réduit pour mobile mais toujours plus grand qu'avant */
+}
+
+.hero p {
+font-size: 22px; /* Plus grand qu'avant même sur mobile */
+}
+
+.section-title {
+font-size: 38px; /* Ajusté pour mobile */
+}
+
+/* Formulaire plus lisible sur mobile */
+.form-group input,
+.form-group textarea {
+font-size: 16px; /* Légèrement réduit sur mobile pour éviter le zoom automatique sur iOS */
+}
+}
+/* Super grandes tailles de texte pour le portfolio */
+
+body {
+font-size: 26px !important; /* Beaucoup plus grand que précédemment */
+}
+
+.logo {
+font-size: 30px !important;
+display: flex; 
+color: #f8fafc;/* Énorme logo */
+}
+
+.nav-links a {
+font-size: 28px !important; /* Très grands liens */
+}
+
+.hero h1 {
+font-size: 80px !important; /* Titre principal énorme */
+}
+
+.hero p {
+font-size: 36px !important; /* Sous-titre très grand */
+max-width: 900px !important; /* Plus large pour contenir le texte plus grand */
+}
+
+.btn {
+font-size: 28px !important; /* Gros boutons */
+padding: 18px 40px !important; /* Plus spacieux */
+}
+
+.about-text p {
+font-size: 28px !important; /* Texte "à propos" très grand */
+}
+
+.section-title {
+font-size: 64px !important; /* Titres de sections énormes */
+}
+
+section > .container > p {
+font-size: 32px !important; /* Texte d'introduction de section très grand */
+}
+
+.skill-card {
+font-size: 28px !important; /* Contenu des cartes de compétences très grand */
+padding: 40px !important; /* Plus d'espace dans les cartes */
+}
+
+.skill-card h3 {
+font-size: 36px !important; /* Titres des cartes très grands */
+margin-bottom: 25px !important; /* Plus d'espace */
+}
+
+.skill-card ul li {
+margin-bottom: 15px !important; /* Plus d'espace entre les items */
+}
+
+.project-content h3 {
+font-size: 36px !important; /* Titres des projets très grands */
+}
+
+.project-content p {
+font-size: 28px !important; /* Description des projets très grande */
+}
+
+.project-links a {
+font-size: 24px !important; /* Liens des projets plus grands */
+padding: 15px 30px !important; /* Plus spacieux */
+}
+
+.form-group label {
+font-size: 30px !important; /* Étiquettes du formulaire très grandes */
+}
+
+.form-group input,
+.form-group textarea {
+font-size: 26px !important; /* Texte des champs très grand */
+padding: 22px !important; /* Plus d'espace dans les champs */
+}
+
+footer {
+font-size: 26px !important; /* Texte du pied de page très grand */
+}
+
+.social-links a {
+font-size: 36px !important; /* Liens sociaux très grands */
+}
+
+/* Ajustements pour les projets et autres éléments */
+.project-img {
+height: 400px !important; /* Plus haut pour accommoder des images plus grandes */
+font-size: 32px !important; /* Texte dans les images plus grand */
+}
+
+/* Pour les mobiles - garder des tailles lisibles mais toujours très grandes */
+@media (max-width: 768px) {
+.hero h1 {
+font-size: 54px !important; /* Encore grand mais tient sur petit écran */
+}
+
+.hero p {
+font-size: 30px !important; /* Texte d'intro grand */
+}
+
+.section-title {
+font-size: 42px !important; /* Titres de sections */
+}
+
+body {
+font-size: 22px !important; /* Base du texte pour mobile */
+}
+}
+/* Modifications pour utiliser toute la largeur de la page */
+
+/* Conteneur principal à 100% de la largeur */
+.container {
+max-width: 80% !important; /* Au lieu de 1200px */
+padding: 0 30px !important; /* Un peu plus de padding sur les côtés */
+}
+
+/* Ajustements pour les sections avec background */
+.skills, .contact {
+width: 100% !important;
+}
+
+/* Ajustements des grilles pour mieux utiliser l'espace */
+.skills-container {
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+gap: 40px !important;
+}
+
+.projects-grid {
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+gap: 40px !important;
+}
+
+/* Formulaire de contact plus large */
+.contact-form {
+max-width: 800px !important; /* Au lieu de 600px */
+}
+
+/* Ajustements pour la section à propos */
+.about-content {
+max-width: 100% !important;
+gap: 60px !important;
+}
+
+/* Meilleure utilisation de l'espace pour les grands écrans */
+@media (min-width: 1600px) {
+.skills-container {
+grid-template-columns: repeat(4, 1fr) !important; /* 4 colonnes sur très grands écrans */
+}
+
+.projects-grid {
+grid-template-columns: repeat(3, 1fr) !important; /* 3 colonnes fixes sur très grands écrans */
+}
+}
+
+
+ <style>
+        /* Variables CSS pour la cohérence des couleurs */
+        :root {
+            --bleu-nuit: #0a1929;
+            --bleu-fonce: #102a43;
+            --violet: #6b46c1;
+            --violet-clair: #9f7aea;
+            --blanc: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bleu-nuit);
+            color: var(--blanc);
+            line-height: 1.6;
+            font-size: 18px;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* STYLES DE LA SECTION CONTACT */
+        .contact {
+            padding: 50px 0;
+            background-color: rgba(16, 42, 67, 0.3);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(16, 42, 67, 0.5);
+        }
+
+        .section-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--violet);
+            text-align: center;
+        }
+
+        .contact-intro {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--violet-clair);
+        }
+
+        /* Style du formulaire de contact */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Style des groupes de champs du formulaire */
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        /* Style des étiquettes des champs */
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: var(--violet-clair);
+            font-weight: bold;
+        }
+
+        /* Style des champs de saisie */
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            border: 2px solid var(--violet);
+            background-color: var(--bleu-fonce);
+            color: var(--blanc);
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 5px rgba(16, 42, 67, 0.5);
+            font-size: 18px;
+        }
+
+        /* Placeholder styling */
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(248, 250, 252, 0.6);
+        }
+
+        /* Style des champs de saisie au focus */
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--violet-clair);
+            box-shadow: 0 0 0 4px rgba(159, 122, 234, 0.3), inset 0 2px 5px rgba(16, 42, 67, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Style pour le textarea */
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Style du bouton d'envoi */
+        .btn-submit {
+            width: 100%;
+            background-color: var(--violet);
+            color: var(--blanc);
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.4), 0 5px 10px rgba(16, 42, 67, 0.3);
+            margin-top: 20px;
+        }
+
+        /* Effet d'animation au survol du bouton */
+        .btn-submit:hover {
+            background-color: var(--violet-clair);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(107, 70, 193, 0.6), 0 10px 20px rgba(16, 42, 67, 0.4);
+        }
+
+        /* Style pour les champs requis */
+        .required {
+            color: #ff6b6b;
+        }
+
+        /* Responsive pour mobile */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .contact-intro {
+                font-size: 18px;
+            }
+            
+            .form-group label {
+                font-size: 18px;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .btn-submit {
+                font-size: 18px;
+                padding: 15px 25px;
+            }
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact {
+            animation: fadeInUp 1s ease-out;
+        }

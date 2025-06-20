@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Développeuse Web Débutante - Najiba NAZARI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary: #06b6d4;
+            --accent: #f43f5e;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.5;
+            overflow-x: hidden;
+            font-size: 14px; /* Taille de texte réduite */
+        }
+        
+        /* Effet de fond matrix */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* En-tête */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1), transparent 70%);
+            animation: headerShine 5s infinite linear;
+        }
+        
+        @keyframes headerShine {
+            0% {
+                transform: translateX(-100%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(0deg);
+            }
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            margin-bottom: 15px;
+            background-color: var(--bg-card);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .profile-img::after {
+            content: '<>';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Fira Code', monospace;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+        
+        .name {
+            font-size: 2.5rem; /* Taille réduite */
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .name::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .title {
+            font-size: 1.3rem; /* Taille réduite */
+            color: var(--primary-light);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .terminal {
+            width: 100%;
+            max-width: 80%;
+            padding: 12px;
+            background-color: rgba(30, 41, 59, 0.8);
+            border-radius: 8px;
+            margin: 0 auto;
+            font-family: 'Fira Code', monospace;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot:nth-child(1) {
+            background-color: var(--accent);
+        }
+        
+        .terminal-dot:nth-child(2) {
+            background-color: var(--warning);
+        }
+        
+        .terminal-dot:nth-child(3) {
+            background-color: var(--success);
+        }
+        
+        .terminal-title {
+            margin-left: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem; /* Taille réduite */
+        }
+        
+        .terminal-content {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            font-size: 0.8rem; /* Taille réduite */
+        }
+        
+        .terminal-prompt {
+            color: var(--success);
+            margin-right: 8px;
+        }
+        
+        .terminal-text {
+            display: inline-block;
+            overflow: hidden;
+            animation: typing 5s steps(60, end) infinite;
+            width: 0;
+        }
+        
+        @keyframes typing {
+            0% { width: 0; }
+            50% { width: 100%; }
+            80% { width: 100%; }
+            100% { width: 0; }
+        }
+        
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--text-light);
+            margin-left: 1px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* Contenu principal */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr; /* Plus d'espace pour la colonne droite */
+            gap: 25px;
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Style des sections */
+        .section {
+            background: linear-gradient(135deg, var(--bg-card), rgba(30, 41, 59, 0.7));
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-left:nth-child(1) { animation-delay: 0.1s; }
+        .section-left:nth-child(2) { animation-delay: 0.2s; }
+        .section-left:nth-child(3) { animation-delay: 0.3s; }
+        .section-right:nth-child(1) { animation-delay: 0.4s; }
+        .section-right:nth-child(2) { animation-delay: 0.5s; }
+        .section-right:nth-child(3) { animation-delay: 0.6s; }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem; /* Taille réduite */
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+        
+        .section-title::before {
+            content: '/>';
+            font-family: 'Fira Code', monospace;
+            color: var(--secondary);
+            margin-right: 8px;
+            font-weight: normal;
+        }
+        
+        .section:hover .section-title::after {
+            transform: scaleX(1);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Section Profil */
+        .profile-content {
+            line-height: 1.7;
+            position: relative;
+            padding: 0 0 0 12px;
+            border-left: 2px solid var(--primary);
+            font-size: 0.95rem; /* Taille réduite */
+        }
+        
+        /* Section Compétences */
+        .skills-category {
+            margin-bottom: 15px;
+        }
+        
+        .skills-category-title {
+            font-size: 1.1rem; /* Taille réduite */
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .skills-category-title::before {
+            content: '{}';
+            font-family: 'Fira Code', monospace;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .skill-item {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--primary);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem; /* Taille réduite */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.25);
+        }
+        
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .skill-item:hover::before {
+            left: 100%;
+        }
+        
+        /* Soft skills */
+        .soft-skills-list {
+            list-style: none;
+        }
+        
+        .soft-skill-item {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+            font-size: 0.9rem; /* Taille réduite */
+        }
+        
+        .soft-skill-item:hover {
+            transform: translateX(3px);
+        }
+        
+        .soft-skill-item::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--warning);
+            font-size: 1rem; /* Taille réduite */
+            transition: transform 0.3s ease;
+        }
+        
+        .soft-skill-item:hover::before {
+            transform: scale(1.2);
+        }
+        
+        .soft-skill-title {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        /* Expérience */
+        .experience-item, .project-item {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-item:hover, .project-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: rgba(30, 41, 59, 0.7);
+        }
+        
+        .experience-item::before, .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .experience-item:hover::before, .project-item:hover::before {
+            width: 4px;
+        }
+        
+        .job-title, .project-title {
+            font-size: 1.2rem; /* Taille réduite */
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--secondary);
+        }
+        
+        .company, .project-tech {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem; /* Taille réduite */
+        }
+        
+        .company::before {
+            content: '@';
+            margin-right: 4px;
+            color: var(--primary);
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .date {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--secondary);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem; /* Taille réduite */
+            margin-bottom: 8px;
+        }
+        
+        .description p {
+            font-size: 0.9rem; /* Taille réduite */
+        }
+        
+        /* Langues */
+        .language-item {
+            margin-bottom: 12px;
+        }
+        
+        .language-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        .language-name {
+            font-weight: 500;
+            font-size: 0.95rem; /* Taille réduite */
+        }
+        
+        .language-level {
+            color: var(--text-muted);
+            font-size: 0.8rem; /* Taille réduite */
+        }
+        
+        .language-bar {
+            height: 6px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .language-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            width: 0;
+            animation: progressAnimation 1.5s ease-out forwards;
+        }
+        
+        @keyframes progressAnimation {
+            from { width: 0; }
+            to { width: var(--progress); }
+        }
+        
+        /* Contact */
+        .contact-list {
+            list-style: none;
+        }
+        
+        .contact-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 50%;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 0.9rem; /* Taille réduite */
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            background: rgba(139, 92, 246, 0.3);
+        }
+        
+        .contact-text {
+            color: var(--text-light);
+            font-size: 0.9rem; /* Taille réduite */
+        }
+        
+        .contact-label {
+            display: block;
+            font-size: 0.95rem; /* Taille réduite */
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        
+        /* Particules flottantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.2;
+            }
+            25% {
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-100px) translateX(80px) rotate(180deg);
+                opacity: 0.3;
+            }
+            75% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.2rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .terminal {
+                max-width: 95%;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            body {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .title {
+                font-size: 1rem;
+            }
+            
+            .terminal {
+                padding: 8px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .skill-item {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .job-title, .project-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effets d'arrière-plan -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <!-- Section d'en-tête -->
+        <header class="header">
+            <div class="profile-img"></div>
+            <h1 class="name">Najiba NAZARI</h1>
+            <h2 class="title">Développeuse Web Junior</h2>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                    </div>
+                    <div class="terminal-title">najiba@dev:~/portfolio</div>
+                </div>
+                <div class="terminal-content">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-text">const developpeuse = { nom: "Najiba NAZARI", passion: "Développement Web" };</span>
+                    <span class="terminal-cursor"></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Contenu principal -->
+        <main class="main-content">
+            <!-- Colonne gauche -->
+            <div class="column-left">
+                <!-- Section Contact -->
+                <section class="section section-left">
+                    <h3 class="section-title">Contact</h3>
+                    <ul class="contact-list">
+                        <li class="contact-item">
+                            <div class="contact-icon">@</div>
+                            <div class="contact-text">
+                                <span class="contact-label">Email</span>
+                                najiba.nazari@lepoles.org
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">in</div>
+                            <div class="contact-text">
+                                <span class="contact-label">LinkedIn</span>
+                                linkedin.com/in/najiba-nazari
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">gh</div>
+                            <div class="contact-text">
+                                <span class="contact-label">GitHub</span>
+                                github.com/najiba-nazari
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">✆</div>
+                            <div class="contact-text">
+                                <span class="contact-label">Téléphone</span>
+                                Votre numéro de téléphone
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                
+                <!-- Section Compétences Techniques -->
+                <section class="section section-left">
+                    <h3 class="section-title">Compétences Techniques</h3>
+                    
+                    <div class="skills-category">
+                        <h4 class="skills-category-title">Frontend</h4>
+                        <div class="skills-list">
+                            <div class="skill-item">HTML</div>
+                            <div class="skill-item">CSS</div>
+                            <div class="skill-item">JavaScript</div>
+                            <div class="skill-item">UX Design</div>
+                            <div class="skill-item">WordPress</div>
+                            <div class="skill-item">Bootstrap</div>
+                            <div class="skill-item">Tailwind CSS</div>
+                            <div class="skill-item">No-code</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h4 class="skills-category-title">Backend</h4>
+                        <div class="skills-list">
+                            <div class="skill-item">PHP</div>
+                            <div class="skill-item">Symfony</div>
+                            <div class="skill-item">SQL</div>
+                            <div class="skill-item">NoSQL</div>
+                            <div class="skill-item">AJAX</div>
+                            <div class="skill-item">API REST</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h4 class="skills-category-title">Outils & Autres</h4>
+                        <div class="skills-list">
+                            <div class="skill-item">Git Bash</div>
+                            <div class="skill-item">GitHub</div>
+                            <div class="skill-item">Figma</div>
+                            <div class="skill-item">Adobe XD</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section Langues -->
+                <section class="section section-left">
+                    <h3 class="section-title">Langues</h3>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-name">Arabe</span>
+                            <span class="language-level">Langue maternelle</span>
+                        </div>
+                        <div class="language-bar">
+                            <div class="language-progress" style="--progress: 100%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-name">Français</span>
+                            <span class="language-level">Intermédiaire</span>
+                        </div>
+                        <div class="language-bar">
+                            <div class="language-progress" style="--progress: 70%;"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Colonne droite -->
+            <div class="column-right">
+                <!-- Section Profil -->
+                <section class="section section-right">
+                    <h3 class="section-title">Profil</h3>
+                    <div class="profile-content">
+                        <p>Développeuse web débutante passionnée par l'univers numérique et en apprentissage actif des technologies front-end et back-end. Curieuse et motivée, j'aime acquérir de nouvelles compétences et relever des défis techniques. Mon objectif est de créer des sites et applications web interactifs tout en développant mes connaissances en programmation. À l'écoute des nouvelles tendances et prête à m'adapter, je suis déterminée à progresser dans ce domaine en constante évolution.</p>
+                    </div>
+                </section>
+                
+                <!-- Soft Skills -->
+                <section class="section section-right">
+                    <h3 class="section-title">Compétences Personnelles</h3>
+                    <ul class="soft-skills-list">
+                        
+                    
+                        <li class="soft-skill-item">
+                            <span class="soft-skill-title">Travail d'équipe :</span> Collaboration efficace au sein d'équipes variées.
+                        </li>
+                        <li class="soft-skill-item">
+                            <span class="soft-skill-title">Adaptabilité :</span> Facilité à m'adapter aux nouvelles technologies et environnements.
+                        </li>
+                        <li class="soft-skill-item">
+                            <span class="soft-skill-title">Organisation :</span> Gestion efficace des tâches et respect des délais.
+                        </li>
+                        <li class="soft-skill-item">
+                            <span class="soft-skill-title">Apprentissage continu :</span> Veille technologique et acquisition régulière de nouvelles compétences.
+                        </li>
+                    </ul>
+                </section>
+                
+                <!-- Section Formation -->
+                <section class="section section-right">
+                    <h3 class="section-title">Formation</h3>
+                    <div class="experience-item">
+                        <div class="job-title">Formation Développement Web Full Stack</div>
+                        <div class="company">Les Pôles - École du Numérique</div>
+                        <div class="date">Janvier 2023 - Décembre 2023</div>
+                        <div class="description">
+                            <p>Formation intensive en développement web, couvrant les bases du HTML/CSS, JavaScript, PHP et les frameworks modernes. Réalisation de projets pratiques et travail en méthode agile, avec focus sur les bonnes pratiques de développement et l'expérience utilisateur.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section Projets -->
+                <section class="section section-right">
+                    <h3 class="section-title">Projets</h3>
+                    <div class="project-item">
+                        <div class="project-title">Portfolio Personnel</div>
+                        <div class="project-tech">HTML, CSS, JavaScript</div>
+                        <div class="description">
+                            <p>Création d'un site portfolio personnel responsive mettant en valeur mes compétences et projets. Implémentation d'animations CSS et d'interactions JavaScript pour une expérience utilisateur dynamique.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-title">Site Vitrine pour Association</div>
+                        <div class="project-tech">WordPress, CSS personnalisé</div>
+                        <div class="description">
+                            <p>Développement d'un site vitrine pour une association locale, avec intégration d'un calendrier d'événements et d'un formulaire de contact. Personnalisation complète du thème WordPress pour répondre aux besoins spécifiques du client.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-title">Application de Gestion de Tâches</div>
+                        <div class="project-tech">HTML, CSS, JavaScript, PHP, MySQL</div>
+                        <div class="description">
+                            <p>Création d'une application web permettant aux utilisateurs de gérer leurs tâches quotidiennes. Fonctionnalités incluant l'ajout, la modification et la suppression de tâches, ainsi que leur catégorisation par priorité.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section Expérience Professionnelle -->
+                <section class="section section-right">
+                    <h3 class="section-title">Expérience Professionnelle</h3>
+                    <div class="experience-item">
+                        <div class="job-title">Stage Développeuse Web</div>
+                        <div class="company">Agence Web Créative</div>
+                        <div class="date">Septembre 2023 - Novembre 2023</div>
+                        <div class="description">
+                            <p>Participation au développement front-end de sites web pour plusieurs clients. Intégration de maquettes Figma en HTML/CSS responsive, implémentation de fonctionnalités JavaScript, et initiation au framework Symfony.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="job-title">Projet Bénévole</div>
+                        <div class="company">Association Culturelle</div>
+                        <div class="date">Juin 2023 - Août 2023</div>
+                        <div class="description">
+                            <p>Refonte du site web de l'association en utilisant WordPress. Mise en place d'une interface moderne et intuitive, optimisation pour les mobiles, et formation des membres à la gestion du contenu.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section Centres d'Intérêt -->
+                <section class="section section-right">
+                    <h3 class="section-title">Centres d'Intérêt</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">Nouvelles technologies</div>
+                        <div class="skill-item">UX/UI Design</div>
+                        <div class="skill-item">Intelligence artificielle</div>
+                        <div class="skill-item">Lecture</div>
+                        <div class="skill-item">Photographie</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Effet d'arrière-plan matrice
+        function createMatrixEffect() {
+            const canvas = document.createElement('canvas');
+            const bg = document.getElementById('matrix-bg');
+            bg.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        // Création des particules
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Position aléatoire
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                
+                particle.style.left = posX + 'px';
+                particle.style.top = posY + 'px';
+                
+                // Taille aléatoire
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Animation avec délai aléatoire
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialisation des effets visuels au chargement
+        window.addEventListener('load', () => {
+            createMatrixEffect();
+            createParticles();
+        });
+        
+        // Ajustement lors du redimensionnement
+        window.addEventListener('resize', () => {
+            const bg = document.getElementById('matrix-bg');
+            bg.innerHTML = '';
+            createMatrixEffect();
+        });
+    </script>
+</body>
+</html>
