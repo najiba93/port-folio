@@ -337,7 +337,8 @@ nav {
 
 /* Style du contenu textuel des cartes de projets */
 .project-content {
-    padding: 20px;
+    padding: 5%;
+    height: 100%;
 }
 
 /* Titres des projets */
@@ -348,7 +349,7 @@ nav {
 
 /* Conteneur des liens de projets */
 .project-links {
-    margin-top: 20px;
+    margin-top: 5%;
     display: flex;
     gap: 10px;
 }

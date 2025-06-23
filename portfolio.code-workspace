@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "portfolio",
+			"path": "."
+		},
+		{
+			"name": "cv2",
+			"path": "../cv2"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"liveServer.settings.multiRootWorkspaceName": "portfolio"
+	}
+}
