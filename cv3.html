@@ -56,7 +56,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            text-decoration: none;
         }
         
         .download-btn:hover {
@@ -309,11 +308,9 @@
         .section-left:nth-child(1) { animation-delay: 0.1s; }
         .section-left:nth-child(2) { animation-delay: 0.2s; }
         .section-left:nth-child(3) { animation-delay: 0.3s; }
-        .section-left:nth-child(4) { animation-delay: 0.4s; }
-        .section-left:nth-child(5) { animation-delay: 0.5s; }
-        .section-right:nth-child(1) { animation-delay: 0.6s; }
-        .section-right:nth-child(2) { animation-delay: 0.7s; }
-        .section-right:nth-child(3) { animation-delay: 0.8s; }
+        .section-right:nth-child(1) { animation-delay: 0.4s; }
+        .section-right:nth-child(2) { animation-delay: 0.5s; }
+        .section-right:nth-child(3) { animation-delay: 0.6s; }
         
         .section-title {
             display: flex;
@@ -707,7 +704,7 @@
 </head>
 <body>
     <!-- Bouton de téléchargement -->
-    <a href="cv.pdf" download class="download-btn">Télécharger CV</a>
+    <button class="download-btn" onclick="downloadCV()">Télécharger CV</button>
     
     <!-- Effets d'arrière-plan -->
     <div class="matrix-bg" id="matrix-bg"></div>
@@ -727,7 +724,7 @@
                         <div class="terminal-dot"></div>
                         <div class="terminal-dot"></div>
                     </div>
-                    <div class="terminal-title"><a href="https://najiba93.github.io/port-folio/" target="_blank">najiba93.github.io/port-folio/</a></div>
+                    <div class="terminal-title">najiba93.github.io/port-folio/</div>
                 </div>
                 <div class="terminal-content">
                     <span class="terminal-prompt">$</span>
@@ -749,21 +746,21 @@
                             <div class="contact-icon">@</div>
                             <div class="contact-text">
                                 <span class="contact-label">Email</span>
-                                <a href="mailto:najiba.93500@outlook.fr">najiba.93500@outlook.fr</a>
+                                najiba.93500@outlook.fr
                             </div>
                         </li>
                         <li class="contact-item">
                             <div class="contact-icon">in</div>
                             <div class="contact-text">
                                 <span class="contact-label">LinkedIn</span>
-                                <a href="https://linkedin.com/in/najiba-nazari-a52b43366" target="_blank">linkedin.com/in/najiba-nazari-a52b43366</a>
+                                linkedin.com/in/najiba-nazari-a52b43366
                             </div>
                         </li>
                         <li class="contact-item">
                             <div class="contact-icon">gh</div>
                             <div class="contact-text">
                                 <span class="contact-label">GitHub</span>
-                                <a href="https://github.com/najiba93" target="_blank">github.com/najiba93</a>
+                                github.com/najiba93
                             </div>
                         </li>
                     </ul>
@@ -905,17 +902,159 @@
                             <p>Site vitrine avec calendrier d'événements et formulaire de contact. Personnalisation complète du thème. <a href="https://dev-cuitillere.pantheonsite.io/" target="_blank" style="color: var(--secondary);">https://dev-cuitillere.pantheonsite.io/</a></p>
                         </div>
                     </div>
-                    
-                    <div class="project-item">
+
+                        <div class="project-item">
                         <div class="project-title">App Gestion de Tâches</div>
-                        <div class="project-tech">JavaScript, PHP, MySQL</div>
+                        <div class="project-tech">JavaScript, PHP, MySQL </div>
                         <div class="description">
-                            <p>Application web de gestion de tâches avec CRUD complet et catégorisation par priorité.</p>
+                            <p>Application web de gestion de tâches avec CRUD complet et catégorisation par priorité. </p>
                         </div>
                     </div>
-                </section>
-            </div>
+                    </section>
+                    </div>
         </main>
     </div>
+
+    <script>
+        // Fonction de téléchargement du CV
+        function downloadCV() {
+            // Masquer temporairement le bouton de téléchargement
+            const downloadBtn = document.querySelector('.download-btn');
+            downloadBtn.style.display = 'none';
+            
+            // Configuration pour le PDF
+            const element = document.body;
+            const opt = {
+                margin: 0.5,
+                filename: 'CV_Najiba_NAZARI_Developpeuse_Web.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Générer et télécharger le PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Réafficher le bouton après téléchargement
+                downloadBtn.style.display = 'flex';
+            });
+        }
+        
+        // Animation des particules
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numParticles = 20;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Animation matrix
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const matrixBg = document.getElementById('matrix-bg');
+            matrixBg.appendChild(canvas);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+            const matrixArray = matrix.split("");
+            
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for(let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.1)';
+                ctx.font = fontSize + 'px monospace';
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 100);
+            
+            // Redimensionner le canvas
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createMatrixRain();
+            
+            // Animation d'apparition des sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = (index * 0.1) + 's';
+            });
+            
+            console.log('%c🚀 CV de Najiba NAZARI - Développeuse Web', 
+                       'color: #8b5cf6; font-size: 16px; font-weight: bold;');
+            console.log('%cMerci de consulter mon CV ! 💜', 
+                       'color: #06b6d4; font-size: 14px;');
+        });
+        
+        // Effet de hover sur les compétences
+        document.querySelectorAll('.skill-item').forEach(skill => {
+            skill.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            
+            skill.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Animation du terminal
+        const terminalTexts = [
+            "const developpeuse = { nom: 'Najiba NAZARI', passion: 'Développement Web' };",
+            "console.log('Prête à coder ! 💻');",
+            "git commit -m 'Nouveau projet terminé ✅'",
+            "npm install nouvelles-competences",
+            "echo 'Toujours en apprentissage ! 🚀'"
+        ];
+        
+        let currentTextIndex = 0;
+        const terminalTextElement = document.querySelector('.terminal-text');
+        
+        function updateTerminalText() {
+            if (terminalTextElement) {
+                terminalTextElement.textContent = terminalTexts[currentTextIndex];
+                currentTextIndex = (currentTextIndex + 1) % terminalTexts.length;
+            }
+        }
+        
+        // Changer le texte du terminal toutes les 5 secondes
+        setInterval(updateTerminalText, 5000);
+    </script>
+    
+    <!-- Bibliothèque html2pdf pour la génération PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>

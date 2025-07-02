@@ -7,19 +7,29 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        /* Optimisé pour l'impression PDF */
+        /* Optimisé pour l'impression PDF sur une seule page */
         @media print {
             body {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                margin: 0;
+                padding: 0;
             }
             
             .no-print {
                 display: none;
             }
             
-            .page-break {
-                page-break-before: always;
+            .pdf-container {
+                box-shadow: none;
+                height: 100vh;
+                max-height: 297mm; /* Hauteur A4 */
+                overflow: hidden;
+            }
+            
+            .pdf-content {
+                height: calc(100vh - 120px);
+                overflow: hidden;
             }
         }
         
@@ -48,10 +58,10 @@
             font-family: 'Poppins', sans-serif;
             background-color: white;
             color: var(--text-dark);
-            line-height: 1.5;
-            font-size: 11pt;
+            line-height: 1.3;
+            font-size: 9pt;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         
         .pdf-container {
@@ -59,13 +69,15 @@
             margin: 0 auto;
             background: white;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            height: auto;
+            min-height: 297mm;
         }
         
-        /* En-tête */
+        /* En-tête réduit */
         .pdf-header {
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
             color: white;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -82,17 +94,17 @@
         }
         
         .pdf-name {
-            font-size: 32pt;
+            font-size: 24pt;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             position: relative;
             z-index: 1;
         }
         
         .pdf-title {
-            font-size: 18pt;
+            font-size: 14pt;
             color: var(--primary-light);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
             z-index: 1;
         }
@@ -100,10 +112,10 @@
         .pdf-terminal {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--primary);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 6px;
+            padding: 10px;
             font-family: 'Fira Code', monospace;
-            font-size: 10pt;
+            font-size: 8pt;
             text-align: left;
             position: relative;
             z-index: 1;
@@ -113,26 +125,27 @@
             color: var(--success);
         }
         
-        /* Contenu principal */
+        /* Contenu principal optimisé */
         .pdf-content {
-            padding: 30px;
+            padding: 20px;
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 30px;
+            gap: 20px;
+            height: auto;
         }
         
-        /* Sections */
+        /* Sections compactes */
         .pdf-section {
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
         
         .pdf-section-title {
-            font-size: 16pt;
+            font-size: 12pt;
             font-weight: 600;
             color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 3px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
         }
@@ -141,124 +154,115 @@
             content: '/>';
             font-family: 'Fira Code', monospace;
             color: var(--secondary);
-            margin-right: 8px;
+            margin-right: 5px;
+            font-size: 10pt;
         }
         
-        /* Contact */
+        /* Contact compact */
         .pdf-contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             color: var(--text-dark);
+            font-size: 8pt;
         }
         
         .pdf-contact-icon {
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             background: var(--primary-light);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
-            font-size: 12pt;
+            margin-right: 8px;
+            font-size: 8pt;
             font-weight: bold;
+            flex-shrink: 0;
         }
         
-        /* Compétences */
+        /* Compétences compactes */
         .pdf-skills-category {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .pdf-skills-title {
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 8px;
-            font-size: 11pt;
+            margin-bottom: 5px;
+            font-size: 9pt;
         }
         
         .pdf-skills-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 3px;
         }
         
         .pdf-skill-item {
             background: var(--primary-light);
             color: white;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 9pt;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 7pt;
         }
         
-        /* Langues */
+        /* Langues simplifiées */
         .pdf-language-item {
+            margin-bottom: 6px;
+            font-size: 8pt;
+        }
+        
+        /* Expérience et Projets compacts */
+        .pdf-experience-item {
+            background: #f8f9fa;
+            border-left: 2px solid var(--primary);
+            padding: 10px;
             margin-bottom: 10px;
         }
         
-        .pdf-language-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 3px;
-            font-size: 10pt;
-        }
-        
-        .pdf-language-bar {
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .pdf-language-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-        }
-        
-        /* Expérience et Projets */
-        .pdf-experience-item {
-            background: #f8f9fa;
-            border-left: 3px solid var(--primary);
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        
         .pdf-job-title {
-            font-size: 13pt;
+            font-size: 10pt;
             font-weight: 600;
             color: var(--secondary);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         
         .pdf-company {
             color: var(--text-muted);
-            font-size: 10pt;
-            margin-bottom: 3px;
+            font-size: 8pt;
+            margin-bottom: 2px;
         }
         
         .pdf-date {
             display: inline-block;
             background: var(--primary-light);
             color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 9pt;
-            margin-bottom: 8px;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-size: 7pt;
+            margin-bottom: 5px;
         }
         
         .pdf-description {
-            font-size: 10pt;
-            line-height: 1.6;
+            font-size: 8pt;
+            line-height: 1.4;
         }
         
-        /* Soft skills */
+        /* Profil compact */
+        .pdf-section .pdf-description {
+            font-size: 8pt;
+            line-height: 1.4;
+        }
+        
+        /* Soft skills compacts */
         .pdf-soft-skill {
-            margin-bottom: 8px;
-            font-size: 10pt;
-            padding-left: 20px;
+            margin-bottom: 5px;
+            font-size: 8pt;
+            padding-left: 15px;
             position: relative;
+            line-height: 1.3;
         }
         
         .pdf-soft-skill::before {
@@ -266,6 +270,7 @@
             position: absolute;
             left: 0;
             color: var(--primary);
+            font-size: 8pt;
         }
         
         .pdf-soft-skill strong {
@@ -277,35 +282,48 @@
             background: #f0f9ff;
             border: 2px solid var(--secondary);
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             text-align: center;
         }
         
         .print-instructions h3 {
             color: var(--secondary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 12pt;
         }
         
         .print-instructions p {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            font-size: 9pt;
         }
         
         .print-button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 30px;
-            border-radius: 25px;
-            font-size: 14pt;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12pt;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             transition: all 0.3s ease;
         }
         
         .print-button:hover {
             background: var(--primary-light);
             transform: translateY(-2px);
+        }
+        
+        /* Liens compacts */
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 8pt;
+        }
+        
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -315,6 +333,7 @@
         <p>1. Cliquez sur le bouton "Imprimer en PDF" ci-dessous</p>
         <p>2. Dans la fenêtre d'impression, choisissez "Enregistrer en PDF"</p>
         <p>3. Assurez-vous que l'option "Graphiques d'arrière-plan" est activée</p>
+        <p>4. Sélectionnez le format A4 pour un rendu optimal</p>
         <button class="print-button" onclick="window.print()">🖨️ Imprimer en PDF</button>
     </div>
     
@@ -322,7 +341,7 @@
         <!-- En-tête -->
         <div class="pdf-header">
             <h1 class="pdf-name">Najiba NAZARI</h1>
-            <h2 class="pdf-title">Développeuse Web Junior</h2>
+            <h2 class="pdf-title">Développeuse Web </h2>
             <div class="pdf-terminal">
                 <span class="pdf-terminal-prompt">$</span> const developpeuse = { nom: "Najiba NAZARI", passion: "Développement Web" };
             </div>
@@ -341,7 +360,7 @@
                     </div>
                     <div class="pdf-contact-item">
                         <div class="pdf-contact-icon">in</div>
-                        <div>www.linkedin.com/in/najiba-nazari-a52b43366</div>
+                        <div>linkedin.com/in/najiba-nazari-a52b43366</div>
                     </div>
                     <div class="pdf-contact-item">
                         <div class="pdf-contact-icon">gh</div>
@@ -359,11 +378,10 @@
                             <span class="pdf-skill-item">HTML</span>
                             <span class="pdf-skill-item">CSS</span>
                             <span class="pdf-skill-item">JavaScript</span>
-                            <span class="pdf-skill-item">UX Design</span>
+                           
                             <span class="pdf-skill-item">WordPress</span>
                             <span class="pdf-skill-item">Bootstrap</span>
                             <span class="pdf-skill-item">Tailwind CSS</span>
-                            <span class="pdf-skill-item">No-code</span>
                         </div>
                     </div>
                     
@@ -375,14 +393,13 @@
                             <span class="pdf-skill-item">SQL</span>
                             <span class="pdf-skill-item">NoSQL</span>
                             <span class="pdf-skill-item">AJAX</span>
-                            <span class="pdf-skill-item">Softr</span>
                         </div>
                     </div>
                     
                     <div class="pdf-skills-category">
                         <div class="pdf-skills-title">Outils</div>
                         <div class="pdf-skills-list">
-                            <span class="pdf-skill-item">Git Bash</span>
+                            <span class="pdf-skill-item">Git</span>
                             <span class="pdf-skill-item">GitHub</span>
                             <span class="pdf-skill-item">Figma</span>
                             <span class="pdf-skill-item">Airtable</span>
@@ -394,22 +411,9 @@
                 <div class="pdf-section">
                     <h3 class="pdf-section-title">Langues</h3>
                     <div class="pdf-language-item">
-                        <div class="pdf-language-info">
-                            <span>Arabe</span>
-                            <span>Langue maternelle</span>
-                        </div>
-                        <div class="pdf-language-bar">
-                            <div class="pdf-language-progress" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="pdf-language-item">
-                        <div class="pdf-language-info">
-                            <span>Français</span>
-                            <span>Intermédiaire</span>
-                        </div>
-                        <div class="pdf-language-bar">
-                            <div class="pdf-language-progress" style="width: 70%;"></div>
-                        </div>
+                        <strong>Arabe :</strong> Langue maternelle<br>
+                        <strong>Français :</strong> Courant<br>
+                        <strong>Anglais :</strong> Intermédiaire
                     </div>
                 </div>
                 
@@ -418,9 +422,26 @@
                     <h3 class="pdf-section-title">Centres d'intérêt</h3>
                     <div class="pdf-skills-list">
                         <span class="pdf-skill-item">Nouvelles technologies</span>
-                        <span class="pdf-skill-item">Intelligence artificielle</span>
+                        <span class="pdf-skill-item">IA</span>
                         <span class="pdf-skill-item">Couture</span>
                         <span class="pdf-skill-item">Bricolage</span>
+                    </div>
+                </div>
+                
+                <!-- Compétences personnelles -->
+                <div class="pdf-section">
+                    <h3 class="pdf-section-title">Compétences personnelles</h3>
+                    <div class="pdf-soft-skill">
+                        <strong>Travail d'équipe</strong> - Collaboration efficace
+                    </div>
+                    <div class="pdf-soft-skill">
+                        <strong>Adaptabilité</strong> - Nouvelles technologies
+                    </div>
+                    <div class="pdf-soft-skill">
+                        <strong>Organisation</strong> - Gestion des tâches
+                    </div>
+                    <div class="pdf-soft-skill">
+                        <strong>Apprentissage continu</strong> - Veille technologique
                     </div>
                 </div>
             </div>
@@ -431,38 +452,20 @@
                 <div class="pdf-section">
                     <h3 class="pdf-section-title">Profil</h3>
                     <p class="pdf-description">
-                        Développeuse web débutante passionnée par l'univers numérique et en apprentissage actif des technologies front-end et back-end. Curieuse et motivée, j'aime acquérir de nouvelles compétences et relever des défis techniques. Mon objectif est de créer des sites et applications web interactifs tout en développant mes connaissances en programmation. À l'écoute des nouvelles tendances et prête à m'adapter, je suis déterminée à progresser dans ce domaine en constante évolution.
+                        Développeuse web  passionnée par l'univers numérique et en apprentissage actif des technologies front-end et back-end. Curieuse et motivée, j'aime acquérir de nouvelles compétences et relever des défis techniques. Mon objectif est de créer des sites et applications web interactifs tout en développant mes connaissances en programmation.
                     </p>
-                </div>
-                
-                <!-- Compétences personnelles -->
-                <div class="pdf-section">
-                    <h3 class="pdf-section-title">Compétences personnelles</h3>
-                    <div class="pdf-soft-skill">
-                        <strong>Travail d'équipe :</strong> Collaboration efficace au sein d'équipes variées.
-                    </div>
-                    <div class="pdf-soft-skill">
-                        <strong>Adaptabilité :</strong> Facilité à m'adapter aux nouvelles technologies et environnements.
-                    </div>
-                    <div class="pdf-soft-skill">
-                        <strong>Organisation :</strong> Gestion efficace des tâches et respect des délais.
-                    </div>
-                    <div class="pdf-soft-skill">
-                        <strong>Apprentissage continu :</strong> Veille technologique et acquisition régulière de nouvelles compétences.
-                    </div>
                 </div>
                 
                 <!-- Formation -->
                 <div class="pdf-section">
                     <h3 class="pdf-section-title">Formation</h3>
                     <div class="pdf-experience-item">
-                        <div class="pdf-job-title">Formation Développeur Web Web Mobile</div>
+                        <div class="pdf-job-title">Formation Développeur Web & Mobile</div>
                         <div class="pdf-company">Les Pôles - École du Numérique</div>
-                        <div class="pdf-date">Janvier 2023 - Décembre 2023</div>
+                        <div class="pdf-date">Janvier - Décembre 2023</div>
                         <p class="pdf-description">
-                            Formation intensive en développement web, couvrant les bases du HTML/CSS, JavaScript, PHP et les frameworks modernes. Réalisation de projets pratiques et travail en méthode agile, avec focus sur les bonnes pratiques de développement et l'expérience utilisateur.
+                           Formation intensive en développement web, axée sur HTML, CSS, JavaScript et PHP. Réalisation de projets pratiques en équipe avec la méthode agile, apprentissage des bases et des bonnes pratiques du code.
                         </p>
-                      
                     </div>
                 </div>
                 
@@ -472,34 +475,34 @@
                     
                     <div class="pdf-experience-item">
                         <div class="pdf-job-title">Portfolio Personnel</div>
-                          <a href="https://najiba93.github.io/port-folio/">portfolio: https://najiba93.github.io/port-folio/ </a>
                         <div class="pdf-company">HTML, CSS, JavaScript</div>
+                        <a href="https://najiba93.github.io/port-folio/">najiba93.github.io/port-folio</a>
                         <p class="pdf-description">
-                            Création d'un site portfolio personnel responsive mettant en valeur mes compétences et projets. Implémentation d'animations CSS et d'interactions JavaScript pour une expérience utilisateur dynamique.
+                            Site portfolio responsive avec animations CSS et interactions JavaScript pour une expérience utilisateur dynamique.
                         </p>
                     </div>
                     
                     <div class="pdf-experience-item">
                         <div class="pdf-job-title">Boutique E-commerce</div>
-                        <div class="pdf-company">WordPress, WooCommerce, CSS personnalisé</div>
+                        <div class="pdf-company">WordPress, WooCommerce</div>
                         <p class="pdf-description">
-                            Conception et développement d'une boutique en ligne complète avec système de paiement intégré, gestion des stocks et interface administrateur. Personnalisation de l'expérience d'achat et optimisation pour les appareils mobiles.
+                            Boutique en ligne complète, gestion des stocks et interface admin. Optimisée mobile.
                         </p>
                     </div>
                     
                     <div class="pdf-experience-item">
-                        <div class="pdf-job-title">Site Vitrine</div>
+                        <div class="pdf-job-title">Site Vitrine Associatif</div>
                         <div class="pdf-company">WordPress, CSS personnalisé</div>
                         <p class="pdf-description">
-                            Développement d'un site vitrine pour une association locale, avec intégration d'un calendrier d'événements et d'un formulaire de contact. Personnalisation complète du thème WordPress.
+                            Site vitrine avec calendrier d'événements et formulaire de contact. Personnalisation complète du thème.
                         </p>
                     </div>
                     
                     <div class="pdf-experience-item">
-                        <div class="pdf-job-title">Application de Gestion de Tâches</div>
-                        <div class="pdf-company">HTML, CSS, JavaScript, PHP, MySQL</div>
+                        <div class="pdf-job-title">App Gestion de Tâches</div>
+                        <div class="pdf-company">JavaScript, PHP, MySQL</div>
                         <p class="pdf-description">
-                            Création d'une application web permettant aux utilisateurs de gérer leurs tâches quotidiennes. Fonctionnalités incluant l'ajout, la modification et la suppression de tâches, ainsi que leur catégorisation par priorité.
+                            Application web de gestion de tâches avec CRUD complet et catégorisation par priorité.
                         </p>
                     </div>
                 </div>
