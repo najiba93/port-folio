@@ -233,96 +233,104 @@
 
             
             <!-- Formulaire de contact -->
-            <form class="contact-form" action="https://formspree.io/f/movwbjad"  method="POST">
-                <!-- Champ Nom -->
-                <div class="form-group">
-                    <label for="name">Nom complet <span class="required">*</span></label>
-                    <input type="text" id="name" name="name" placeholder="Votre nom et prénom" required>
-                </div>
-                
-                <!-- Champ Email -->
-                <div class="form-group">
-                    <label for="email">Adresse email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
-                </div>
-                
-                <!-- Champ Téléphone -->
-                <div class="form-group">
-                    <label for="phone">Téléphone</label>
-                    <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
-                </div>
-                
-                <!-- Champ Sujet -->
-                <div class="form-group">
-                    <label for="subject">Sujet <span class="required">*</span></label>
-                    <select id="subject" name="subject" required>
-                        <option value="">Sélectionnez un sujet</option>
-                        <option value="devis">Demande de devis</option>
-                        <option value="projet">Nouveau projet</option>
-                        <option value="collaboration">Collaboration</option>
-                        <option value="maintenance">Maintenance de site</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                
-                <!-- Champ Budget -->
-                <div class="form-group">
-                    <label for="budget">Budget estimé</label>
-                    <select id="budget" name="budget">
-                        <option value="">Sélectionnez votre budget</option>
-                        <option value="500-1000">500€ - 1 000€</option>
-                        <option value="1000-3000">1 000€ - 3 000€</option>
-                        <option value="3000-5000">3 000€ - 5 000€</option>
-                        <option value="5000+">Plus de 5 000€</option>
-                        <option value="non-defini">Non défini</option>
-                    </select>
-                </div>
-                
-                <!-- Champ Message -->
-                <div class="form-group">
-                    <label for="message">Message <span class="required">*</span></label>
-                    <textarea id="message" name="message" placeholder="Décrivez votre projet, vos besoins, vos attentes..." required></textarea>
-                </div>
-                <div style="display:none">
-    <input type="text" name="_gotcha">
-</div>
-                <!-- Bouton d'envoi -->
-                <button type="submit" class="btn-submit">Envoyer le message</button>
-                
-            </form>
-        </section>
+            <form class="contact-form" action="https://formspree.io/f/movwbjad" method="POST">
+    <div class="form-group">
+        <label for="name">Nom complet <span class="required">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Votre nom et prénom" required>
     </div>
+    <div class="form-group">
+        <label for="email">Adresse email <span class="required">*</span></label>
+        <input type="email" id="email" name="_replyto" placeholder="votre.email@exemple.com" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+    </div>
+    <div class="form-group">
+        <label for="subject">Sujet <span class="required">*</span></label>
+        <select id="subject" name="subject" required>
+            <option value="">Sélectionnez un sujet</option>
+            <option value="devis">Demande de devis</option>
+            <option value="projet">Nouveau projet</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="maintenance">Maintenance de site</option>
+            <option value="autre">Autre</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="budget">Budget estimé</label>
+        <select id="budget" name="budget">
+            <option value="">Sélectionnez votre budget</option>
+            <option value="500-1000">500€ - 1 000€</option>
+            <option value="1000-3000">1 000€ - 3 000€</option>
+            <option value="3000-5000">3 000€ - 5 000€</option>
+            <option value="5000+">Plus de 5 000€</option>
+            <option value="non-defini">Non défini</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="message">Message <span class="required">*</span></label>
+        <textarea id="message" name="message" placeholder="Décrivez votre projet, vos besoins, vos attentes..." required></textarea>
+    </div>
+    <div style="display:none">
+        <input type="text" name="_gotcha">
+    </div>
+    <button type="submit" class="btn-submit">Envoyer le message</button>
+</form>
 
     <script>
         // Script pour améliorer l'expérience utilisateur
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.contact-form');
-            
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Animation du bouton lors de l'envoi
-                const button = form.querySelector('.btn-submit');
-                const originalText = button.textContent;
-                
-                button.textContent = 'Envoi en cours...';
-                button.style.background = '#4ade80';
-                button.disabled = true;
-                
-                // Simulation d'envoi (remplacez par votre logique d'envoi)
+       document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Empêche la soumission par défaut pour gérer l'animation
+        
+        const button = form.querySelector('.btn-submit');
+        const originalText = button.textContent;
+        
+        // Animation du bouton
+        button.textContent = 'Envoi en cours...';
+        button.style.background = '#4ade80';
+        button.disabled = true;
+        
+        // Envoyer la requête à Formspree via Fetch
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Succès
+                button.textContent = 'Message envoyé !';
+                button.style.background = '#22c55e';
+                form.reset(); // Réinitialiser le formulaire
                 setTimeout(() => {
-                    button.textContent = 'Message envoyé !';
-                    button.style.background = '#22c55e';
-                    
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                        button.style.background = '';
-                        button.disabled = false;
-                        form.reset();
-                    }, 2000);
-                }, 1500);
-            });
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 2000);
+            } else {
+                // Erreur
+                throw new Error('Erreur lors de l\'envoi du formulaire');
+            }
+        })
+        .catch(error => {
+            // Gestion des erreurs
+            button.textContent = 'Erreur lors de l\'envoi';
+            button.style.background = '#ef4444';
+            console.error('Erreur:', error);
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+                button.disabled = false;
+            }, 2000);
         });
+    });
+});
     </script>
 
 
