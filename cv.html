@@ -722,7 +722,7 @@
 </head>
 <div class="pdf-container">
     <!-- Bouton de téléchargement -->
-    <a href="CV.pdf" download class="download-btn">Télécharger CV</a>
+    <button onclick="generatePDF()" class="download-btn">Télécharger CV</button>
 
 
 
@@ -949,28 +949,77 @@
   <!-- 2. Ton script JS pour générer le PDF -->
   <script>
 function generatePDF() {
+  // Afficher un indicateur de chargement
+  const button = document.querySelector('.download-btn');
+  const originalText = button.innerHTML;
+  button.innerHTML = 'Génération en cours...';
+  button.disabled = true;
+  
   const element = document.getElementById('cv-content');
+  
+  // Options optimisées pour le web
+  const opt = {
+    margin: [10, 10, 10, 10],
+    filename: 'CV_Najiba_NAZARI.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { 
+      scale: 2, 
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#0f172a'
+    },
+    jsPDF: { 
+      unit: 'mm', 
+      format: 'a4', 
+      orientation: 'portrait' 
+    },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+  
   html2pdf()
-    .set({
-      margin: 0,
-      filename: 'CV_Najiba_NAZARI.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    })
+    .set(opt)
     .from(element)
     .toPdf()
     .get('pdf')
     .then(function(pdf) {
-      // Réduit la taille du contenu pour tenir sur une page si besoin
+      // Vérifier si le PDF a plus d'une page
       if (pdf.internal.getNumberOfPages() > 1) {
-        alert("Le contenu est trop long pour une page. Réduis la taille du texte ou du contenu !");
+        console.warn("Le contenu peut être trop long pour une page");
       }
     })
-    .save();
+    .save()
+    .then(() => {
+      // Restaurer le bouton après génération
+      button.innerHTML = originalText;
+      button.disabled = false;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la génération du PDF:', error);
+      alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
+      button.innerHTML = originalText;
+      button.disabled = false;
+    });
 }
 
+// Fonction pour créer des particules d'arrière-plan
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 20;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Initialiser les particules au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+  createParticles();
+});
   </script>
 
 
