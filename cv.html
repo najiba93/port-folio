@@ -945,73 +945,9 @@
 
     <!-- Ton contenu HTML/CSS ici -->
   </div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
   <!-- 2. Ton script JS pour générer le PDF -->
   <script>
-// Fonction pour gérer le téléchargement du CV
-function handleCVDownload(event) {
-  event.preventDefault();
-  
-  const link = document.getElementById('download-link');
-  const originalText = link.innerHTML;
-  
-  // Essayer d'abord le téléchargement direct
-  fetch('CV.pdf')
-    .then(response => {
-      if (response.ok) {
-        // Si le fichier existe, laisser le lien normal fonctionner
-        return;
-      } else {
-        // Si le fichier n'est pas accessible, générer le PDF
-        throw new Error('Fichier non accessible');
-      }
-    })
-    .catch(error => {
-      console.log('Fichier CV.pdf non accessible, génération du PDF...');
-      link.innerHTML = 'Génération en cours...';
-      
-      const element = document.getElementById('cv-content');
-      
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'CV_Najiba_NAZARI.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: '#0f172a'
-        },
-        jsPDF: { 
-          unit: 'mm', 
-          format: 'a4', 
-          orientation: 'portrait' 
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-      
-      html2pdf()
-        .set(opt)
-        .from(element)
-        .toPdf()
-        .get('pdf')
-        .then(function(pdf) {
-          if (pdf.internal.getNumberOfPages() > 1) {
-            console.warn("Le contenu peut être trop long pour une page");
-          }
-        })
-        .save()
-        .then(() => {
-          link.innerHTML = originalText;
-        })
-        .catch(error => {
-          console.error('Erreur lors de la génération du PDF:', error);
-          alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
-          link.innerHTML = originalText;
-        });
-    });
-}
-
 // Fonction pour créer des particules d'arrière-plan
 function createParticles() {
   const particlesContainer = document.getElementById('particles');
@@ -1027,13 +963,9 @@ function createParticles() {
   }
 }
 
-// Initialiser les particules et le gestionnaire de téléchargement
+// Initialiser les particules au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
   createParticles();
-  
-  // Ajouter l'événement de clic au lien de téléchargement
-  const downloadLink = document.getElementById('download-link');
-  downloadLink.addEventListener('click', handleCVDownload);
 });
   </script>
 
