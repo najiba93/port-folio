@@ -496,3 +496,17 @@ footer {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+
+.btn-download {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-download:hover {
+  background-color: #0056b3;
+}
