@@ -44,20 +44,24 @@
         }
         
         /* Bouton de téléchargement fixe */
-        .download-btn {
+         .download-btn {
+
+
+        
+
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
+            top: 250px;
+            right: 150px;
+            background: linear-gradient(135deg, var( --text-light), var( --text-light));
+            color: rgb(204, 34, 34);
+          
             padding: 12px 20px;
             border-radius: 25px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(243, 240, 240, 0.3);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -71,10 +75,40 @@
         }
         
         .download-btn::before {
-            content: '📄';
+            content: '';
             font-size: 16px;
-        }
+        } 
         
+
+
+
+
+
+        .download-btn a {
+            background-color: var( --text-light); /* Changed to a bold red for higher visibility */
+            color: rgb(216, 206, 206);
+            padding: 14px 30px; /* Increased padding for larger button */
+            text-decoration: none;
+            border-radius: 8px; /* Slightly larger border-radius */
+            font-size: 18px; /* Larger font size */
+            font-weight: bold; /* Bold text for emphasis */
+            box-shadow: 0 4px 8px rgba(206, 200, 200, 0.2); /* Added shadow for depth */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .download-btn a:hover {
+            background-color: #0b163b; /* Darker red on hover */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+
+
+
+
+
+
+
+
+
         /* Effet de fond matrix */
         .matrix-bg {
             position: fixed;
@@ -760,8 +794,8 @@
 
   <div id="cv-content">
     <!-- Bouton pour télécharger le CV -->
-    <div class="btn-download">
-      <button>  <a href="cv.pdf" download="cv.pdf"> Télécharger mon CV</a>
+    <div class="download-btn">
+      <button>  <a href="cv.pdf" download="cv.pdf"> Télécharger en PDF</a>
       </button> 
     </div>
    
@@ -950,12 +984,36 @@
                     <h3 class="section-title">Projets</h3>
                     
                     <div class="project-item">
-                        <div class="project-title">Portfolio Personnel</div>
+                        <div class="project-title">boutique en ligne</div>
                         <div class="project-tech">HTML, CSS, JavaScript</div>
                         <div class="description">
-                            <p>Site portfolio responsive avec animations CSS et interactions JavaScript pour une expérience utilisateur dynamique. <a href="https://najiba93.github.io/port-folio/" target="_blank" style="color: var(--secondary);">najiba93.github.io/port-folio</a></p>
+                            <p>Site de boutique en ligne responsive avec animations CSS et interactions JavaScript pour une expérience utilisateur dynamique. <a href="https://najiba93.github.io/Royaume-des-Jouets/" target="_blank" style="color: var(--secondary);">https://najiba93.github.io/Royaume-des-Jouets/</a></p>
                         </div>
                     </div>
+
+
+
+
+
+        <div class="project-item">
+                        <div class="project-title">jeu de rapidité développé</div>
+                        <div class="project-tech">nodejs</div>
+                        <div class="description">
+                            <p>Un jeu de rapidité développé en JavaScript où vous devez cliquer le plus vite possible <a href="https://najiba93.github.io/clickFast2/" target="_blank" style="color: var(--secondary);">https://najiba93.github.io/clickFast2/</a></p>
+                        </div>
+                    </div>
+
+
+
+     <div class="project-item">
+                        <div class="project-title">jeu interactive</div>
+                        <div class="project-tech">HTML, CSS, et JavaScript</div>
+                        <div class="description">
+                            <p>LogiTriad est une application web interactive proposant trois jeux classiques : Morpion, Puissance , et Pendu,  notamment pour les enfants grâce aux récents ajustements. Développée avec HTML, CSS, et JavaScript, <a href="https://najiba93.github.io/jeux-LogiTriad/" target="_blank" style="color: var(--secondary);">https://najiba93.github.io/jeux-LogiTriad//</a></p>
+                        </div>
+                    </div>
+
+
                     
                     <div class="project-item">
                         <div class="project-title">Boutique E-commerce</div>
@@ -965,6 +1023,20 @@
                         </div>
                     </div>
                     
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
                     <div class="project-item">
                         <div class="project-title">App Gestion de Tâches</div>
                         <div class="project-tech">JavaScript, PHP, MySQL</div>
