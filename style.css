@@ -232,9 +232,12 @@ nav {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 30px;
+    max-width: calc(3 * 380px + 2 * 25px); /* Limite à max 3 colonnes (890px) */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .project-card {
@@ -253,7 +256,7 @@ nav {
 
 .project-img {
     width: 100%;
-    height: clamp(200px, 30vw, 250px);
+    height: clamp(500px, 30vw, 250px);
     overflow-y: auto;
     background-color: #152638;
     display: flex;
@@ -264,7 +267,7 @@ nav {
 
 .project-img img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
 }
 
